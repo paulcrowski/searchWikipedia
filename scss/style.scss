@@ -16,8 +16,8 @@ body {
 
 #search {
   margin: 3px;
-  width:5px;
-  padding: 0 15px;
+  width:2px;
+  padding: 0 12px;
   height: 24px;
   font-size: 14px;
   color: #666;
@@ -28,9 +28,11 @@ body {
   position: relative;
   -webkit-transition: .9s ease;
   -moz-transition: .9s ease;
+  transition: .9s ease;
   &:focus {
     outline: none;
     width: 580px;
+    box-shadow: 0 0 0 1px rgba(200, 145, 130, 0.5), inset 0 1px 2px rgba(150, 26, 64, 0.3), 0 2px 0 rgba(255, 44, 168, 0.6);
   }
 }
 p.searchLine {
