@@ -16,21 +16,30 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<section id="background" class="text-center">
+
+<section id="background">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 box">
-            <h3 id ="quote text-center">Hey do you want to search WikiPedia?</h3>
-            <p class="searchLine"><input name="search" id="search" type="search"></p>
+            <div class="input-group">
+
+                <input name="search" id="search" type="search" autocomplete="off" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default buttonRandom" type="button">Go!</button>
+                </span>
+                <p class="autocomplete">Autocomplete</p>
+            </div>
+
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2 box">
-            <a href="#" class="btn btn-danger buttonRandom" role="button">Search wikipedia</a>
-            <p id="valueShow">show value:</p>
-            <p id="wikiShow">show wiki:</p>
+            <!--<p id="valueShow">show value:</p>-->
+            <p id="wikiShow"></p>
+
         </div>
     </div>
 </section>
+
 <script src="js/app.js"></script>
 </body>
 </html>
