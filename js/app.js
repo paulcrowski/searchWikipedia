@@ -4,6 +4,7 @@
 console.log('test');
 
 $(document).ready(function() {
+    $.ajaxSetup({ cache: false });
     // check input
     inputValue();
     // button ready for click
@@ -26,21 +27,28 @@ $(document).ready(function() {
 
 function inputValue () {
     // input check val on keyUp, check Enter
-    $("#search").keyup(function(e){
-       var searchValue = $(this).val();
-       // check length of input if less <0 hide autocomplete
-       if (searchValue.length > 0) {
-           $('.autocomplete').fadeIn();
-       } else {
-           $('.autocomplete').fadeOut();
-       }
-       // active autocomplete search, show autocomplete tips
-       autocompleteWiki(searchValue);
-       // if enter in input do click on button
-       if(e.keyCode == 13)
-       {
-           $('.buttonRandom').click();
-       }
+    var search = $('#search');
+    var autocomplete = $('.autocomplete');
+    search.keyup(function(e){
+        var searchValue = $(this).val();
+        // check length of input if less <0 hide autocomplete
+        if (searchValue.length > 0) {
+            $('.autocomplete').fadeIn();
+        } else {
+            $('.autocomplete').fadeOut();
+        }
+        search.focusout(function(){
+            autocomplete.fadeOut();
+        }).focusin(function(){
+            autocomplete.fadeIn();
+        })
+        // active autocomplete search, show autocomplete tips
+        autocompleteWiki(searchValue);
+        // if enter in input do click on button
+        if(e.keyCode == 13)
+        {
+            $('.buttonRandom').click();
+        }
 
     });
 
@@ -57,7 +65,7 @@ function getLinkHelper (searchValue) {
 // getjson for autocomplete
 function autocompleteWiki(searchValue) {
     $.getJSON(getLinkHelper(searchValue), autocomplete);
- }
+}
 
 // getjson for wiki
 function getWiki(searchValue) {
@@ -70,7 +78,7 @@ function autocomplete (dataWiki)  {
     var autocomplete = $('.autocomplete');
     var page = "";
     $.each(title, function( index, value ) {
-        page = page + '<a class="wikiLink" href="'+dataWiki[3][index]+'">'+
+        page = page + '<a class="wikiLink" target="_blank" href="'+dataWiki[3][index]+'">'+
             value+ '</a><br/>';
     });
     autocomplete.html(page);
@@ -82,12 +90,11 @@ function showWiki (dataWiki) {
     var show = $('#wikiShow');
     var page = "";
     $.each(title, function( index, value ) {
-        page = page + '<a class="wikiLink" href="'+dataWiki[3][index]+'">'+
-                '<div class="panel panel-default">' +
+        page = page + '<a class="wikiLink" target="_blank" href="'+dataWiki[3][index]+'">'+
+            '<div class="panel panel-default">' +
             '<div class="panel-heading">'+ value +'</div>'+
             '<div class="panel-body">'+ dataWiki[2][index] + '</div>'
             +'</div>' +'</a>';
     });
     show.html(page);
 }
-
